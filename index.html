@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    padding: 10px;
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+  }
+
+  .item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 6px;
+    background: #fafafa;
+    text-align: center;
+  }
+
+  .item img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+
+  .name {
+    font-size: 13px;
+    margin-top: 6px;
+    word-break: break-all;
+  }
+</style>
+</head>
+<body>
+<a href="https://www.utsrwr.xyz">© 2026 UTSRWR | All Rights Reserved</a>
+<h2>Galeri Gambar</h2>
+<div class="gallery" id="gallery"></div>
+<a href="https://www.utsrwr.xyz">© 2026 UTSRWR | All Rights Reserved</a>
+<script>
+const user = "utsrwr";
+const repo = "utsrwr.github.io";
+const branch = "main";
+
+const imageExt = ["png", "jpg", "jpeg", "webp"];
+
+fetch(`https://api.github.com/repos/${user}/${repo}/contents/?ref=${branch}`)
+  .then(res => res.json())
+  .then(files => {
+    const gallery = document.getElementById("gallery");
+
+    files.forEach(file => {
+      if (
+        file.type === "file" &&
+        imageExt.some(ext => file.name.toLowerCase().endsWith(ext))
+      ) {
+        const item = document.createElement("div");
+        item.className = "item";
+
+        const img = document.createElement("img");
+        img.src = file.download_url;
+        img.alt = file.name;
+
+        const name = document.createElement("div");
+        name.className = "name";
+        name.textContent = file.name;
+
+        item.appendChild(img);
+        item.appendChild(name);
+        gallery.appendChild(item);
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
