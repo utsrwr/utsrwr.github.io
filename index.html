@@ -2,79 +2,229 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UTSRWR GIT</title>
 <style>
+  :root {
+    --primary: #2563eb;
+    --bg-gray: #f8fafc;
+    --text-dark: #1e293b;
+    --card-bg: #ffffff;
+  }
+
   body {
-    font-family: Arial, sans-serif;
-    padding: 10px;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-gray);
+    color: var(--text-dark);
+    margin: 0;
+    padding: 20px;
   }
 
-  .gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 12px;
-  }
-
-  .item {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 6px;
-    background: #fafafa;
+  header {
+    max-width: 1200px;
+    margin: 0 auto 30px;
     text-align: center;
   }
 
-  .item img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 6px;
+  .copyright {
+    font-size: 12px;
+    color: #64748b;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 10px;
   }
 
-  .name {
+  /* Navigasi Halaman Modern */
+  .nav-container {
+    max-width: 1200px;
+    margin: 0 auto 40px;
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+  }
+
+  .nav-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .page-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .page-link {
+    text-decoration: none;
+    color: var(--primary);
+    background: #eff6ff;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+  }
+
+  .page-link:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-2px);
+  }
+
+  /* Galeri Grid */
+  .gallery-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+  }
+
+  .card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid #e2e8f0;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+  }
+
+  .img-container {
+    width: 100%;
+    height: 180px;
+    background: #f1f5f9;
+    overflow: hidden;
+  }
+
+  .card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+  }
+
+  .card:hover img {
+    transform: scale(1.05);
+  }
+
+  .card-info {
+    padding: 12px;
+  }
+
+  .file-name {
     font-size: 13px;
-    margin-top: 6px;
-    word-break: break-all;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 4px;
+  }
+
+  .file-meta {
+    font-size: 11px;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  h2 {
+    max-width: 1200px;
+    margin: 0 auto 20px;
+    font-size: 22px;
   }
 </style>
 </head>
 <body>
-<a href="https://www.utsrwr.xyz">© 2026 UTSRWR | All Rights Reserved</a>
-<h2>Galeri Gambar</h2>
-<div class="gallery" id="gallery"></div>
-<a href="https://www.utsrwr.xyz">© 2026 UTSRWR | All Rights Reserved</a>
+
+<header>
+  <a href="https://www.utsrwr.xyz" class="copyright">© 2026 UTSRWR | All Rights Reserved</a>
+</header>
+
+<div class="nav-container" id="nav-section" style="display: none;">
+  <div class="nav-title">📂 Menu</div>
+  <div class="page-tags" id="html-list"></div>
+</div>
+
+<h2>🖼️ Koleksi Gambar</h2>
+<div class="gallery-grid" id="image-grid"></div>
+
+<footer style="text-align: center; margin-top: 50px; padding-bottom: 30px;">
+  <a href="https://www.utsrwr.xyz" class="copyright">© 2026 UTSRWR | All Rights Reserved</a>
+</footer>
+
 <script>
-const user = "utsrwr";
-const repo = "utsrwr.github.io";
-const branch = "main";
+const config = {
+  user: "utsrwr",
+  repo: "utsrwr.github.io",
+  branch: "main",
+  imageExt: ["png", "jpg", "jpeg", "webp", "gif"],
+  // Daftar file yang dilarang muncul di navigasi atas
+  excludedFiles: ["index.html", "googlea89e0d505ac08048.html"]
+};
 
-const imageExt = ["png", "jpg", "jpeg", "webp"];
-
-fetch(`https://api.github.com/repos/${user}/${repo}/contents/?ref=${branch}`)
+fetch(`https://api.github.com/repos/${config.user}/${config.repo}/contents/?ref=${config.branch}`)
   .then(res => res.json())
-  .then(files => {
-    const gallery = document.getElementById("gallery");
+  .then(data => {
+    const htmlList = document.getElementById("html-list");
+    const imageGrid = document.getElementById("image-grid");
+    const navSection = document.getElementById("nav-section");
 
-    files.forEach(file => {
+    let htmlCount = 0;
+
+    data.forEach(file => {
+      const nameLower = file.name.toLowerCase();
+
+      // Logika File HTML
+      if (
+        file.type === "file" && 
+        nameLower.endsWith(".html") && 
+        !config.excludedFiles.includes(nameLower)
+      ) {
+        htmlCount++;
+        const link = document.createElement("a");
+        link.className = "page-link";
+        link.href = file.name;
+        link.textContent = file.name.replace('.html', ''); // Hilangkan .html agar lebih bersih
+        htmlList.appendChild(link);
+      }
+
+      // Logika File Gambar
       if (
         file.type === "file" &&
-        imageExt.some(ext => file.name.toLowerCase().endsWith(ext))
+        config.imageExt.some(ext => nameLower.endsWith(ext))
       ) {
-        const item = document.createElement("div");
-        item.className = "item";
+        const extension = nameLower.split('.').pop();
+        const card = document.createElement("div");
+        card.className = "card";
 
-        const img = document.createElement("img");
-        img.src = file.download_url;
-        img.alt = file.name;
-
-        const name = document.createElement("div");
-        name.className = "name";
-        name.textContent = file.name;
-
-        item.appendChild(img);
-        item.appendChild(name);
-        gallery.appendChild(item);
+        card.innerHTML = `
+          <div class="img-container">
+            <img src="${file.download_url}" alt="${file.name}" loading="lazy">
+          </div>
+          <div class="card-info">
+            <div class="file-name" title="${file.name}">${file.name}</div>
+            <div class="file-meta">${extension} • ${(file.size / 1024).toFixed(1)} KB</div>
+          </div>
+        `;
+        imageGrid.appendChild(card);
       }
     });
+
+    if (htmlCount > 0) navSection.style.display = "block";
+  })
+  .catch(err => {
+    console.error("Error fetching repository:", err);
   });
 </script>
 
