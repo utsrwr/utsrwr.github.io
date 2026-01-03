@@ -11,220 +11,109 @@
     --text-dark: #1e293b;
     --card-bg: #ffffff;
   }
+  body { font-family: 'Segoe UI', sans-serif; background: var(--bg-gray); color: var(--text-dark); padding: 20px; margin: 0; }
+  .container { max-width: 1200px; margin: 0 auto; }
+  
+  /* Navigasi Atas */
+  .nav-box { background: white; padding: 20px; border-radius: 12px; margin-bottom: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+  .nav-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+  .nav-links a { text-decoration: none; background: #eff6ff; color: var(--primary); padding: 8px 15px; border-radius: 6px; font-size: 14px; font-weight: 600; transition: 0.2s; }
+  .nav-links a:hover { background: var(--primary); color: white; }
 
-  body {
-    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    background-color: var(--bg-gray);
-    color: var(--text-dark);
-    margin: 0;
-    padding: 20px;
-  }
-
-  header {
-    max-width: 1200px;
-    margin: 0 auto 30px;
-    text-align: center;
-  }
-
-  .copyright {
-    font-size: 12px;
-    color: #64748b;
-    text-decoration: none;
-    display: block;
-    margin-bottom: 10px;
-  }
-
-  /* Navigasi Halaman Modern */
-  .nav-container {
-    max-width: 1200px;
-    margin: 0 auto 40px;
-    background: var(--card-bg);
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
-  }
-
-  .nav-title {
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .page-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  .page-link {
-    text-decoration: none;
-    color: var(--primary);
-    background: #eff6ff;
-    padding: 8px 16px;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 500;
-    transition: all 0.2s;
-    border: 1px solid transparent;
-  }
-
-  .page-link:hover {
-    background: var(--primary);
-    color: white;
-    transform: translateY(-2px);
-  }
-
-  /* Galeri Grid */
-  .gallery-grid {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 20px;
-  }
-
-  .card {
-    background: var(--card-bg);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    transition: transform 0.3s, box-shadow 0.3s;
-    border: 1px solid #e2e8f0;
-  }
-
-  .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
-  }
-
-  .img-container {
-    width: 100%;
-    height: 180px;
-    background: #f1f5f9;
-    overflow: hidden;
-  }
-
-  .card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s;
-  }
-
-  .card:hover img {
-    transform: scale(1.05);
-  }
-
-  .card-info {
-    padding: 12px;
-  }
-
-  .file-name {
-    font-size: 13px;
-    font-weight: 500;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    margin-bottom: 4px;
-  }
-
-  .file-meta {
-    font-size: 11px;
-    color: #94a3b8;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  h2 {
-    max-width: 1200px;
-    margin: 0 auto 20px;
-    font-size: 22px;
-  }
+  /* Grid Galeri */
+  .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+  .card { background: white; border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0; transition: 0.3s; }
+  .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+  .card img { width: 100%; height: 200px; object-fit: cover; }
+  .card-body { padding: 15px; font-size: 13px; }
+  .card-title { font-size: 15px; font-weight: 700; margin-bottom: 10px; color: #0f172a; display: block; }
+  .meta-tag { color: #64748b; margin-bottom: 5px; display: block; }
+  .badge { display: inline-block; background: #dcfce7; color: #166534; padding: 3px 10px; border-radius: 5px; font-size: 11px; font-weight: 600; margin-top: 10px; }
 </style>
 </head>
 <body>
 
-<header>
-  <a href="https://www.utsrwr.xyz" class="copyright">© 2026 UTSRWR | All Rights Reserved</a>
-</header>
+<div class="container">
+  <header style="text-align:center; margin-bottom:40px;">
+    <a href="https://www.utsrwr.xyz" style="color:#94a3b8; text-decoration:none; font-size:12px;">© 2026 UTSRWR | All Rights Reserved</a>
+  </header>
 
-<div class="nav-container" id="nav-section" style="display: none;">
-  <div class="nav-title">📂 Menu</div>
-  <div class="page-tags" id="html-list"></div>
+  <div id="nav-section" class="nav-box" style="display:none;">
+    <div style="font-weight:700; color:#475569;">📄 HALAMAN LAINNYA</div>
+    <div id="html-links" class="nav-links"></div>
+  </div>
+
+  <h2>🖼️ Galeri Visual Terverifikasi</h2>
+  <div id="gallery" class="gallery"></div>
 </div>
 
-<h2>🖼️ Koleksi Gambar</h2>
-<div class="gallery-grid" id="image-grid"></div>
-
-<footer style="text-align: center; margin-top: 50px; padding-bottom: 30px;">
-  <a href="https://www.utsrwr.xyz" class="copyright">© 2026 UTSRWR | All Rights Reserved</a>
-</footer>
-
 <script>
-const config = {
+const settings = {
   user: "utsrwr",
   repo: "utsrwr.github.io",
   branch: "main",
-  imageExt: ["png", "jpg", "jpeg", "webp", "gif"],
-  // Daftar file yang dilarang muncul di navigasi atas
-  excludedFiles: ["index.html", "googlea89e0d505ac08048.html"]
+  images: ["png", "jpg", "jpeg", "webp"],
+  ignore: ["index.html", "googlea89e0d505ac08048.html"],
+  defaultAuthor: "utsrwr.xyz",
+  defaultLocation: "Indonesia"
 };
 
-fetch(`https://api.github.com/repos/${config.user}/${config.repo}/contents/?ref=${config.branch}`)
+fetch(`https://api.github.com/repos/${settings.user}/${settings.repo}/contents/?ref=${settings.branch}`)
   .then(res => res.json())
-  .then(data => {
-    const htmlList = document.getElementById("html-list");
-    const imageGrid = document.getElementById("image-grid");
+  .then(files => {
+    const gallery = document.getElementById("gallery");
+    const htmlLinks = document.getElementById("html-links");
     const navSection = document.getElementById("nav-section");
+    const today = new Date().toISOString().split('T')[0];
 
-    let htmlCount = 0;
+    let hasPages = false;
 
-    data.forEach(file => {
-      const nameLower = file.name.toLowerCase();
+    files.forEach(file => {
+      const name = file.name;
+      const nameLower = name.toLowerCase();
 
-      // Logika File HTML
-      if (
-        file.type === "file" && 
-        nameLower.endsWith(".html") && 
-        !config.excludedFiles.includes(nameLower)
-      ) {
-        htmlCount++;
-        const link = document.createElement("a");
-        link.className = "page-link";
-        link.href = file.name;
-        link.textContent = file.name.replace('.html', ''); // Hilangkan .html agar lebih bersih
-        htmlList.appendChild(link);
+      // 1. Filter HTML (Kecuali index & google verif)
+      if (nameLower.endsWith(".html") && !settings.ignore.includes(nameLower)) {
+        hasPages = true;
+        const a = document.createElement("a");
+        a.href = name;
+        a.textContent = name.replace(".html", "").toUpperCase();
+        htmlLinks.appendChild(a);
       }
 
-      // Logika File Gambar
-      if (
-        file.type === "file" &&
-        config.imageExt.some(ext => nameLower.endsWith(ext))
-      ) {
-        const extension = nameLower.split('.').pop();
+      // 2. Galeri dengan Metadata dari Nama File
+      if (settings.images.some(ext => nameLower.endsWith(ext))) {
+        
+        // --- LOGIKA EKSTRAKSI TANGGAL ---
+        // Mencari pola YYYY-MM-DD di awal nama file (cth: 2025-05-20-pantai.jpg)
+        const dateMatch = name.match(/^(\d{4}-\d{2}-\d{2})/);
+        const finalDate = dateMatch ? dateMatch[1] : today;
+        const cleanName = dateMatch ? name.replace(dateMatch[0] + "-", "").split(".")[0] : name.split(".")[0];
+
         const card = document.createElement("div");
+        card.setAttribute("vocab", "https://schema.org/");
+        card.setAttribute("typeof", "ImageObject");
         card.className = "card";
 
         card.innerHTML = `
-          <div class="img-container">
-            <img src="${file.download_url}" alt="${file.name}" loading="lazy">
-          </div>
-          <div class="card-info">
-            <div class="file-name" title="${file.name}">${file.name}</div>
-            <div class="file-meta">${extension} • ${(file.size / 1024).toFixed(1)} KB</div>
+          <img src="${file.download_url}" alt="${cleanName}" property="contentUrl">
+          <div class="card-body">
+            <span property="name" class="card-title">${cleanName.replace(/-/g, ' ')}</span>
+            <span class="meta-tag">👤 Creator: <span property="author">${settings.defaultAuthor}</span></span>
+            <span class="meta-tag">📍 Lokasi: <span property="contentLocation">${settings.defaultLocation}</span></span>
+            <span class="meta-tag">📅 Tanggal: ${finalDate}</span>
+            
+            <meta property="datePublished" content="${finalDate}">
+            <meta property="description" content="Foto ${cleanName} diunggah di ${settings.repo}">
+            
+            <div class="badge">✓ Licensable</div>
           </div>
         `;
-        imageGrid.appendChild(card);
+        gallery.appendChild(card);
       }
     });
 
-    if (htmlCount > 0) navSection.style.display = "block";
-  })
-  .catch(err => {
-    console.error("Error fetching repository:", err);
+    if (hasPages) navSection.style.display = "block";
   });
 </script>
 
