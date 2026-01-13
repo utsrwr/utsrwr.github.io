@@ -1,0 +1,16 @@
+title: UTSRWR
+description: Blog campuran kuliner, film, dan teknologi
+url: "https://utsrwr.github.io"
+baseurl: ""
+
+permalink: /:year/:month/:title.html
+
+markdown: kramdown
+theme: null
+
+author:
+  name: UTSRWR
+
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
