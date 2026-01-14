@@ -1,28 +1,57 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+  <!-- BASIC -->
   <meta charset="UTF-8">
-  <title>{{ page.title }} | {{ site.title }}</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="{{ page.excerpt | strip_html | truncate: 150 }}">
-  <link rel="stylesheet" href="https://utsrwr.github.io/assets/style.css">
-  <head>
-  <meta charset="UTF-8">
+
   <title>
-    {% if page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}
+    {% if page.title %}
+      {{ page.title }} | {{ site.title }}
+    {% else %}
+      {{ site.title }} – {{ site.description }}
+    {% endif %}
   </title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
-  <!-- Open Graph -->
-  <meta property="og:title" content="{{ page.title | default: site.title }}">
-  <meta property="og:description" content="{{ page.excerpt | strip_html | truncate: 160 }}">
-  <meta property="og:type" content="article">
-  <meta property="og:url" content="{{ site.url }}{{ page.url }}">
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image">
+
+  <meta name="description"
+        content="{% if page.excerpt %}
+                   {{ page.excerpt | strip_html | truncate: 160 }}
+                 {% else %}
+                   {{ site.description }}
+                 {% endif %}">
+
+  <!-- CANONICAL -->
   <link rel="canonical" href="{{ site.url }}{{ page.url }}">
-  <link rel="stylesheet" href="https://utsrwr.github.io/assets/style.css">
-</head>
+
+  <!-- OPEN GRAPH (WA / FB / TELEGRAM) -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="{{ site.title }}">
+  <meta property="og:title" content="{{ page.title | default: site.title }}">
+  <meta property="og:description"
+        content="{{ page.excerpt | strip_html | truncate: 160 }}">
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+  <meta property="og:image"
+        content="{{ site.url }}{{ page.thumbnail | default: '/assets/img/thumbnail.jpg' }}">
+
+  <!-- IMAGE SIZE RECOMMENDED -->
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- TWITTER / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ page.title | default: site.title }}">
+  <meta name="twitter:description"
+        content="{{ page.excerpt | strip_html | truncate: 160 }}">
+  <meta name="twitter:image"
+        content="{{ site.url }}{{ page.thumbnail | default: '/assets/img/thumbnail.jpg' }}">
+
+  <!-- FAVICON -->
+  <link rel="icon" href="/favicon.ico">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/style.css">
+
 </head>
 <body>
 
