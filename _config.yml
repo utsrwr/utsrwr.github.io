@@ -14,3 +14,6 @@ author:
 plugins:
   - jekyll-feed
   - jekyll-sitemap
+
+compress_html:
+  clippings: all
