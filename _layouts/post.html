@@ -2,46 +2,29 @@
 layout: default
 ---
 
-<article class="post">
-  <nav class="breadcrumb">
-  <a href="/">Home</a> →
-  <span>{{ page.categories[0] }}</span>
+<nav class="breadcrumb">
+  <a href="/">Home</a> → {{ page.categories[0] }}
 </nav>
+
+<article class="post">
   <h1>{{ page.title }}</h1>
-  <small>
-    {{ page.date | date: "%d %B %Y" }} ·
-    {{ page.categories | join: ", " }}
-  </small>
+  <small>{{ page.date | date: "%d %B %Y" }}</small>
+
+  <img src="{{ page.thumbnail }}" alt="{{ page.title }}" loading="eager">
 
   <div class="content">
     {{ content }}
-    <hr>
-<h3>Artikel Terkait</h3>
-<ul>
-{% for post in site.posts limit:5 %}
-  {% if post.url != page.url %}
-    <li><a href="{{ post.url }}">{{ post.title }}</a></li>
-  {% endif %}
-{% endfor %}
-</ul>
   </div>
 </article>
 
-<!-- Article Schema -->
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "{{ page.title }}",
-  "datePublished": "{{ page.date | date_to_xmlschema }}",
-  "author": {
-    "@type": "Person",
-    "name": "{{ site.author.name }}"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "{{ site.title }}"
-  },
-  "mainEntityOfPage": "{{ site.url }}{{ page.url }}"
+ "@context": "https://schema.org",
+ "@type": "BlogPosting",
+ "headline": "{{ page.title }}",
+ "datePublished": "{{ page.date | date_to_xmlschema }}",
+ "author": { "@type": "Person", "name": "{{ site.author.name }}" },
+ "publisher": { "@type": "Organization", "name": "{{ site.title }}" },
+ "mainEntityOfPage": "{{ site.url }}{{ page.url }}"
 }
 </script>
