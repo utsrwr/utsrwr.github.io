@@ -1,30 +1,14 @@
-title: UTSRWR
-description: Blog campuran kuliner, film, dan teknologi
+title: "UTSRWR"
+description: "Jejak digital pemikiran, rasa, dan pengalaman — ditulis apa adanya."
+author: "Wildan Hidayat"
+baseurl: "" 
 url: "https://utsrwr.github.io"
-baseurl: ""
-
-author:
-  name: UTSRWR
-
-permalink: /:year/:month/:title.html
-
 markdown: kramdown
 theme: null
 
+timezone: Asia/Jakarta
+
 plugins:
-  - jekyll-feed
+  - jekyll-seo-tag
   - jekyll-sitemap
-  - jekyll-paginate
-
-paginate: 6
-paginate_path: "/page/:num/"
-
-defaults:
-  - scope:
-      path: ""
-      type: posts
-    values:
-      thumbnail: /assets/img/default.jpg
-
-sass:
-  style: compressed
+  - jekyll-feed
