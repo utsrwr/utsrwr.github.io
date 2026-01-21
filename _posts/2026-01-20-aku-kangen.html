@@ -6,81 +6,108 @@ permalink: /aku-kangen/
 ---
 
 <style>
-  body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #111;
-    color: #fff;
-    text-align: center;
-    overflow-x: hidden;
-    user-select: none;
-  }
+/* RESET & DASAR */
+* {
+  box-sizing: border-box;
+}
 
-  #bg {
-    position: fixed;
-    inset: 0;
-    background: url("https://utsrwr.github.io/assets/img/aku-kangen.jpg") center/cover no-repeat;
-    filter: blur(1px) brightness(0.5);
-    z-index: -1;
-  }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #111;
+  color: #fff;
+  text-align: center;
+  overflow-x: hidden;
+  user-select: none;
+}
 
-  #content {
-    margin-top: 10vh;
-    padding: 20px;
-  }
+/* BACKGROUND */
+#bg {
+  position: fixed;
+  inset: 0;
+  background: url("https://utsrwr.github.io/assets/img/aku-kangen.jpg") center/cover no-repeat;
+  filter: blur(1px) brightness(0.5);
+  z-index: -1;
+}
 
-  #photo {
-    width: 130px; height: 130px;
-    border-radius: 15px;
-    background-color: white;
-    object-fit: contain;
-    display: none;
-    margin: 20px auto;
-    border: solid 2px black;
-    box-shadow: 0 0 5px rgba(255,255,255,1);
-    transition: opacity .6s ease;
-  }
+/* KONTEN UTAMA */
+#content {
+  margin-top: min(15vh, 140px);
+  padding: clamp(16px, 4vw, 48px);
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
 
-  #text {
-    font-size: 18px;
-    font-weight: bold;
+/* FOTO */
+#photo {
+  width: clamp(120px, 18vw, 220px);
+  height: clamp(120px, 18vw, 220px);
+  border-radius: clamp(12px, 2vw, 20px);
+  background-color: white;
+  object-fit: contain;
+  display: none;
+  margin: 20px auto;
+  border: solid 2px black;
+  box-shadow: 0 0 10px rgba(255,255,255,1);
+  transition: opacity .6s ease, transform .4s ease;
+}
+
+/* TEKS */
+#text {
+  font-size: clamp(16px, 2.2vw, 28px);
+  font-weight: bold;
+  opacity: 0;
+  line-height: 1.6em;
+  text-shadow: 0 0 6px rgba(0,0,0,1);
+  transition: opacity .6s ease, transform .3s ease;
+}
+
+/* JUDUL DALAM TEKS */
+#text h2 {
+  font-size: clamp(22px, 4vw, 40px);
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+
+/* TOMBOL */
+#btn {
+  margin-top: 30px;
+  padding: clamp(10px, 2vw, 16px) clamp(22px, 4vw, 40px);
+  border: none;
+  border-radius: 14px;
+  font-size: clamp(14px, 2vw, 20px);
+  font-weight: bold;
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  cursor: pointer;
+  display: none;
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+#btn:hover {
+  transform: scale(0.95);
+  background: rgba(255,255,255,0.25);
+}
+
+/* HATI JATUH */
+.heart {
+  position: fixed;
+  top: -10px;
+  color: rgba(255,255,255,0.9);
+  animation: fall linear forwards;
+  pointer-events: none;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh);
     opacity: 0;
-    text-shadow: 0 0 4px rgba(0,0,0,1);
-    transition: opacity .6s ease, transform .3s ease;
-    line-height: 1.4em;
   }
+}
 
-  #btn {
-    margin-top: 30px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 10px;
-    font-size: 15px;
-    font-weight: bold;
-    background: rgba(255,255,255,0.15);
-    color: #fff;
-    cursor: pointer;
-    display: none;
-    transition: transform 0.2s ease;
-  }
-  #btn:hover { transform: scale(0.9); }
-
-  .heart {
-    position: fixed;
-    top: -10px;
-    color: rgba(255,0,80,0.8);
-    font-size: 18px;
-    animation: fall linear forwards;
-  }
-
-  @keyframes fall {
-    to {
-      transform: translateY(100vh);
-      opacity: 0;
-    }
-  }
-  
-  #overlay {
+/* OVERLAY POPUP */
+#overlay {
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,0.0);
@@ -89,65 +116,108 @@ permalink: /aku-kangen/
   align-items: center;
   z-index: 1000;
 }
+
 #popup {
-  background: rgba(0,0,0,0.5);
-  padding: 20px 30px;
-  border-radius: 12px;
+  background: rgba(0,0,0,0.55);
+  padding: clamp(16px, 4vw, 28px) clamp(20px, 5vw, 40px);
+  border-radius: 16px;
   text-align: center;
   border: solid 1px white;
-  box-shadow: 0 0 5px rgba(255,255,255,0.8);
+  box-shadow: 0 0 12px rgba(255,255,255,0.8);
+  max-width: 90%;
 }
+
+/* TEKS POPUP */
 #popup p {
   color: white;
-  margin-bottom: 15px;
-  font-size: 16px;
+  margin-bottom: 18px;
+  font-size: clamp(14px, 2vw, 18px);
 }
+
+/* TOMBOL MULAI */
 #startBtn {
-  padding: 8px 18px;
-  border: none;
-  border-radius: 8px;
+  padding: clamp(8px, 2vw, 12px) clamp(18px, 4vw, 28px);
+  border-radius: 12px;
+  font-size: clamp(14px, 2vw, 18px);
   font-weight: bold;
   background: rgba(0,0,0,0.3);
   color: white;
   border: solid 1px white;
-  box-shadow: 0 0 5px rgba(255,255,255,0.8);
+  box-shadow: 0 0 8px rgba(255,255,255,0.8);
   cursor: pointer;
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+#startBtn:hover {
+  transform: scale(0.95);
+  background: rgba(0,0,0,0.5);
+}
+
+/* OPTIMASI LAYAR BESAR */
+@media (min-width: 1024px) {
+  #content {
+    margin-top: 18vh;
+  }
 }
 </style>
 
-<div id="bg"></div>
-<audio id="music" src="https://utsrwr.github.io/assets/ado/aku-kangen.mp3"></audio>
-<!-- overlay start -->
-<div id="overlay">
+<!-- BACKGROUND -->
+<div id="bg" aria-hidden="true"></div>
+
+<!-- AUDIO -->
+<audio
+  id="music"
+  src="https://utsrwr.github.io/assets/ado/aku-kangen.mp3"
+  preload="auto"
+></audio>
+
+<!-- OVERLAY START -->
+<div id="overlay" role="dialog" aria-modal="true">
   <div id="popup">
-    <p>Hai, siap lihat pesannya? 💌</p>
-    <button id="startBtn">Mulai</button>
+    <p>Hai, siap lihat pesannya?</p>
+    <button id="startBtn" type="button">Mulai</button>
   </div>
 </div>
 
-<div id="content">
-  <img id="photo" src="">
-  <div id="text">Klik layar untuk mulai...</div>
-  <button id="btn">Kirim Pesan 💌</button>
-</div>
+<!-- KONTEN UTAMA -->
+<main id="content">
+  <img
+    id="photo"
+    src=""
+    alt="Foto kenangan"
+    loading="lazy"
+    decoding="async"
+  />
+
+  <div id="text" aria-live="polite">
+    Klik layar untuk mulai...
+  </div>
+
+  <button id="btn" type="button">
+    Bagikan ke WhatsApp
+  </button>
+</main>
 
 <script>
-  const teks = [
+/* ===============================
+   KONFIGURASI DATA
+================================ */
+const teks = [
   "Kadang aku mikir...",
-  "Kenapa semua harus berubah secepat ini...💔",
-  "Dulu, kamu yang selalu bikin aku ketawa...😊",
-  "Sekarang... kamu yang bikin aku jatuh berkali-kali.😞",
-  "Aku udah coba kuat...💪 aku udah coba ikhlas...🙏",
-  "Tapi nyatanya... hati ini masih nggak bisa bohong.💔",
-  "Aku kangen...😔 aku masih sayang...❤️",
-  "Tapi kamu bahkan nggak pernah lagi peduli.💭",
-  "Mungkin... aku cuma tempat singgah...🚶",
-  "Bukan rumah yang kamu cari.🏚️",
-  "Dan kalau suatu saat kamu denger ini...🎧",
-  "Aku cuma mau bilang... aku masih di sini...🌙 meski kamu udah pergi jauh.🌌"
+  "Kenapa semua harus berubah secepat ini...",
+  "Dulu, kamu yang selalu bikin aku ketawa...",
+  "Sekarang... kamu yang bikin aku jatuh berkali-kali.",
+  "Aku udah coba kuat... aku udah coba ikhlas...",
+  "Tapi nyatanya... hati ini masih nggak bisa bohong.",
+  "Aku kangen... aku masih sayang...",
+  "Tapi kamu bahkan nggak pernah lagi peduli.",
+  "Mungkin... aku cuma tempat singgah...",
+  "Bukan rumah yang kamu cari.️",
+  "Dan kalau suatu saat kamu denger ini...",
+  "Aku cuma mau bilang... aku masih di sini... meski kamu udah pergi jauh."
 ];
 
-  const fotos = [
+const fotos = [
     "https://utsrwr.github.io/assets/img/bubu20.gif",
     "https://utsrwr.github.io/assets/img/bubu21.webp",
     "https://utsrwr.github.io/assets/img/bubu22.gif",
@@ -162,68 +232,143 @@ permalink: /aku-kangen/
     "https://utsrwr.github.io/assets/img/bubu31.gif",
   ];
 
-  // jadwal sinkron teks (ms), sama kayak feeldream
-  const jadwal = [0, 1500, 4500, 7500, 11500, 15500, 19500, 22500, 25500, 27500, 29500, 32500];
+// jadwal sinkron (ms)
+const jadwal = [0, 1500, 4500, 7500, 11500, 15500, 19500, 22500, 25500, 27500, 29500, 32500];
 
-  const textEl = document.getElementById("text");
-  const photoEl = document.getElementById("photo");
-  const btn = document.getElementById("btn");
-  const music = document.getElementById("music");
+/* ===============================
+   ELEMENT
+================================ */
+const textEl  = document.getElementById("text");
+const photoEl = document.getElementById("photo");
+const btn     = document.getElementById("btn");
+const music   = document.getElementById("music");
+const overlay = document.getElementById("overlay");
+const startBtn= document.getElementById("startBtn");
 
-// document.body.addEventListener("click", start, {once:true});
-document.getElementById("startBtn").addEventListener("click", ()=>{
-  document.getElementById("overlay").style.display = "none";
-  start();
+/* ===============================
+   STATE
+================================ */
+let sudahMulai = false;
+let heartInterval = null;
+
+/* ===============================
+   EVENT START
+================================ */
+startBtn.addEventListener("click", () => {
+  if (sudahMulai) return;
+  sudahMulai = true;
+  overlay.style.display = "none";
+  mulai();
 });
 
-  function start(){
-    music.play();
-    tampilkan(0);
-    jadwal.forEach((waktu, i)=>{
-      if(i>0 && i<=teks.length){
-        setTimeout(()=>tampilkan(i), waktu);
-      }
-    });
-    // munculkan tombol setelah akhir
-    setTimeout(()=>btn.style.display="inline-block", jadwal[jadwal.length-1]+1500);
-    setInterval(jatuhkanHati, 400);
-  }
+/* ===============================
+   START SEQUENCE
+================================ */
+function mulai() {
+  // audio aman (mobile friendly)
+  music.volume = 1;
+  music.play().catch(()=>{});
 
-  function tampilkan(i){
-    textEl.style.opacity = 0;
-    setTimeout(()=>{
-      textEl.innerHTML = teks[i];
-      textEl.style.opacity = 1;
-      textEl.style.transform = "scale(1.05)";
-      setTimeout(()=>textEl.style.transform="scale(1)",300);
+  tampilkan(0);
 
-      // ganti foto sesuai step
-      if(i<fotos.length){
-        photoEl.src = fotos[i];
-        photoEl.style.display = "block";
-        photoEl.style.opacity = 1;
-      }
-    },300);
-  }
-
-  btn.addEventListener("click", ()=>{
-    let jawaban = prompt("Ketik pesanmu (max 20 karakter):");
-    if(jawaban && jawaban.trim().length <= 20){
-      let pesan = encodeURIComponent(jawaban.trim());
-      window.location.href = "https://api.whatsapp.com/send?phone=&text=" + pesan;
-    } else {
-      alert("Pesan kosong / terlalu panjang!");
+  jadwal.forEach((waktu, i) => {
+    if (i > 0 && i < teks.length) {
+      setTimeout(() => tampilkan(i), waktu);
     }
   });
 
-  function jatuhkanHati(){
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "🌙";
-    heart.style.left = Math.random()*100 + "vw";
-    heart.style.fontSize = (12 + Math.random()*20) + "px";
-    heart.style.animationDuration = (3+Math.random()*2)+"s";
-    document.body.appendChild(heart);
-    setTimeout(()=>heart.remove(), 5000);
+  // tombol muncul setelah terakhir
+  const akhir = jadwal[jadwal.length - 1] || 0;
+  setTimeout(() => {
+    btn.style.display = "inline-block";
+  }, akhir + 1500);
+
+  // hati jatuh (interval disimpan)
+  heartInterval = setInterval(jatuhkanHati, 450);
+}
+
+/* ===============================
+   TAMPILKAN TEKS & FOTO
+================================ */
+function tampilkan(i) {
+  textEl.style.opacity = 0;
+  textEl.style.transform = "scale(0.98)";
+
+  setTimeout(() => {
+    textEl.innerHTML = teks[i] || "";
+    textEl.style.opacity = 1;
+    textEl.style.transform = "scale(1.05)";
+
+    setTimeout(() => {
+      textEl.style.transform = "scale(1)";
+    }, 300);
+
+    // foto sinkron
+    if (fotos[i]) {
+      photoEl.src = fotos[i];
+      photoEl.style.display = "block";
+      photoEl.style.opacity = 1;
+      photoEl.style.transform = "scale(1.05)";
+      setTimeout(() => {
+        photoEl.style.transform = "scale(1)";
+      }, 300);
+    }
+  }, 300);
+}
+
+/* ===============================
+   SHARE WA
+================================ */
+btn.addEventListener("click", () => {
+  const pesanOtomatis =
+`Kadang aku mikir...
+Kenapa semua harus berubah secepat ini...
+Dulu, kamu yang selalu bikin aku ketawa...
+Sekarang... kamu yang bikin aku jatuh berkali-kali.
+Aku udah coba kuat... aku udah coba ikhlas...
+Tapi nyatanya... hati ini masih nggak bisa bohong.
+Aku kangen... aku masih sayang...
+Tapi kamu bahkan nggak pernah lagi peduli.
+Mungkin... aku cuma tempat singgah...
+Bukan rumah yang kamu cari.
+Dan kalau suatu saat kamu denger ini...
+Aku cuma mau bilang... aku masih di sini... meski kamu udah pergi jauh.
+
+utsrwr.github.io/aku-kangen`;
+
+  window.location.href =
+    "https://wa.me/?text=" + encodeURIComponent(pesanOtomatis);
+});
+
+/* ===============================
+   HATI JATUH (OPTIMIZED)
+================================ */
+function jatuhkanHati() {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.textContent = "*";
+
+  const size = 20 + Math.random() * 40;
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = size + "px";
+  heart.style.animationDuration = (5 + Math.random() * 4) + "s";
+
+  document.body.appendChild(heart);
+
+  // auto cleanup
+  setTimeout(() => {
+    heart.remove();
+  }, 9000);
+}
+
+/* ===============================
+   CLEANUP SAAT TAB TIDAK AKTIF
+================================ */
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) {
+    clearInterval(heartInterval);
+  } else if (sudahMulai) {
+    heartInterval = setInterval(jatuhkanHati, 450);
   }
+});
 </script>
